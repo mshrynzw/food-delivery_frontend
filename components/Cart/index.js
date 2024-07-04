@@ -1,11 +1,13 @@
 import { Badge, Button, Card, CardBody, CardTitle } from "reactstrap"
 import Link from "next/link"
 import { useContext } from "react"
+import { useRouter } from "next/router"
 import AppContext from "../../context/AppContext"
 
-const Cart = () => {
+const Cart = (props) => {
   const appContext = useContext(AppContext)
   const { cart } = appContext
+  const router = useRouter()
 
   return (
     <div>
@@ -54,11 +56,27 @@ const Cart = () => {
                 <h5 style={{ fontWeight: 100, color: "gray" }}>合計：</h5>
                 <h3>{Number(cart.total).toLocaleString()}円</h3>
               </Badge>
-              <div>
-                <Link href="/checkout">
-                  <a className="btn btn-primary" style={{ width: "100%" }}>注文する</a>
-                </Link>
-              </div>
+              {router.pathname === (`/checkout`)
+                ?
+                <div>
+                  <Link
+                    href={`/restaurant?id=${router.query.id}`}
+                    as={`/restaurant/${router.query.id}`}
+                  >
+                    <a className="btn btn-primary" style={{ width: "100%" }}>
+                      戻る
+                    </a>
+                  </Link>
+                </div>
+                :
+                <div>
+                  <Link href={`/checkout?id=${props.restaurant.data.id}`}>
+                    <a className="btn btn-primary" style={{ width: "100%" }}>
+                      確認する
+                    </a>
+                  </Link>
+                </div>
+              }
             </div>
           </div>
         </CardBody>

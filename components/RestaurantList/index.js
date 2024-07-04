@@ -2,7 +2,7 @@ import { Card, CardBody, CardImg, CardTitle, Col, Row } from "reactstrap"
 import Link from "next/link"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
-import restaurants from "../../pages/restaurants"
+import restaurants from "../../pages/restaurant"
 
 const GET_RESTAURANTS = gql`
 {
@@ -52,8 +52,8 @@ const RestaurantList = (props) => {
               </CardBody>
               <div className="card-footer">
                 <Link
-                  href={`/restaurants?id=${restaurant.id}`}
-                  as={`/restaurants/${restaurant.id}`}
+                  href={`/restaurant?id=${restaurant.id}`}
+                  as={`/restaurant/${restaurant.id}`}
                 >
                   <a className="btn btn-primary">もっと見る</a>
                 </Link>

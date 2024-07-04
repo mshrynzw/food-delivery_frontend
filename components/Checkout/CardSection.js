@@ -13,7 +13,7 @@ const CardSection = (props) => {
                 <CardElement/>
                 <br/>
                 <div className="order-button-wrapper">
-                  <button onClick={props.submitOrder}>注文を確認する</button>
+                  <button onClick={props.submitOrder}>注文する</button>
                 </div>
                 {props.errorMsg ? <div>{props.errorMsg}</div> : null}
                 {props.successMsg ? <div>{props.successMsg}</div> : null}

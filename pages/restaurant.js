@@ -36,7 +36,7 @@ const GET_RESTAURANT_DISHES = gql`
   }
 `
 
-const RestaurantLists = (props) => {
+const RestaurantLists = () => {
   const appContext = useContext(AppContext)
   const router = useRouter()
   const { loading, error, data } = useQuery(GET_RESTAURANT_DISHES, { variables: { id: router.query.id } })
@@ -93,7 +93,7 @@ const RestaurantLists = (props) => {
           </style>
           <Col xs="3" style={{ padding: 0 }}>
             <div>
-              <Cart/>
+              <Cart restaurant={restaurant}/>
             </div>
           </Col>
         </Row>
