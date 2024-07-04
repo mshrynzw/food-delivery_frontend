@@ -54,7 +54,13 @@ const CheckOutForm = () => {
       <FormGroup>
         <div>
           <Label>住所</Label>
-          <Input name="address" onChange={(e) => handleChange(e)}/>
+          {success === ""
+            ?
+            <Input name="address" onChange={(e) => handleChange(e)}/>
+
+            :
+            <Input name="address" onChange={(e) => handleChange(e)} disabled/>
+          }
         </div>
       </FormGroup>
       <CardSection submitOrder={submitOrder} errorMsg={error} successMsg={success}/>
