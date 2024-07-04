@@ -1,4 +1,4 @@
-import { FormGroup, Input, Label } from "reactstrap"
+import { FormGroup, Input, Label, Modal, ModalBody, ModalHeader } from "reactstrap"
 import CardSection from "./CardSection"
 import Cookies from "js-cookie"
 import AppContext from "../../context/AppContext"
@@ -6,22 +6,24 @@ import { useContext, useState } from "react"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 
 const CheckOutForm = () => {
+  const appContext = useContext(AppContext)
+  const userToken = Cookies.get("token")
+  const elements = useElements()
+  const stripe = useStripe()
+
   const [data, setData] = useState({
     address: "",
     stripe_id: ""
   })
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [modal, setModal] = useState(false)
+  const toggle = () => setModal(!modal)
+
   const handleChange = (e) => {
     const updateItem = (data[e.target.name] = e.target.value)
     setData({ ...data, updateItem })
   }
-
-  const elements = useElements()
-  const stripe = useStripe()
-
-  const appContext = useContext(AppContext)
-  const userToken = Cookies.get("token")
 
   const submitOrder = async () => {
     const cardElement = elements.getElement(CardElement)
@@ -41,9 +43,10 @@ const CheckOutForm = () => {
     })
 
     if (response.ok) {
-      setSuccess("注文に成功しました。")
+      setSuccess(true)
+      toggle()
     } else {
-      setError("注文に失敗しました。")
+      setError(true)
     }
   }
 
@@ -54,15 +57,20 @@ const CheckOutForm = () => {
       <FormGroup>
         <div>
           <Label>住所</Label>
-          {success === ""
+          {success
             ?
-            <Input name="address" onChange={(e) => handleChange(e)}/>
-            :
             <Input name="address" onChange={(e) => handleChange(e)} disabled/>
+            :
+            <Input name="address" onChange={(e) => handleChange(e)}/>
           }
         </div>
       </FormGroup>
-      <CardSection submitOrder={submitOrder} errorMsg={error} successMsg={success}/>
+      <CardSection submitOrder={submitOrder} error={error} success={success}/>
+      <Modal isOpen={modal} toggle={toggle}>
+        {success ? <ModalBody>注文に成功しました。</ModalBody> : null}
+        {error ? <ModalBody>注文に失敗しました。</ModalBody> : null}
+      </Modal>
+
       <style jsx global>
         {`
           .paper {
