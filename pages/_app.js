@@ -25,14 +25,14 @@ class MyApp extends App {
         this.setState({
           cart: {
             items: JSON.parse(cart),
-            total: (this.state.cart.total += item.price * item.quantity)
+            total: (this.state.cart.total += item.attributes.price * item.quantity)
           }
         })
       })
     }
 
     if (token) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users/me`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -56,7 +56,7 @@ class MyApp extends App {
       this.setState({
           cart: {
             items: [...items, item],
-            total: this.state.cart.total + item.price
+            total: this.state.cart.total + item.attributes.price
           },
         },
         () => Cookies.set("cart", this.state.cart.items))
@@ -69,7 +69,7 @@ class MyApp extends App {
                 ? Object.assign({}, item, { quantity: item.quantity + 1 })
                 : item
             ),
-            total: this.state.cart.total + item.price,
+            total: this.state.cart.total + item.attributes.price,
           },
         },
         () => Cookies.set("cart", this.state.cart.items)

@@ -23,8 +23,8 @@ const Cart = () => {
                   return (
                     <div className="items-one" key={item.id} style={{ marginBottom: 15 }}>
                       <div>
-                        <span id="item-price">&nbsp; {item.price.toLocaleString()}円</span>
-                        <span id="item-name">&nbsp; {item.name}</span>
+                        <span id="item-price">&nbsp; {Number(item.attributes.price).toLocaleString()}円</span>
+                        <span id="item-name">&nbsp; {item.attributes.name}</span>
                       </div>
                       <div>
                         <Button
@@ -52,13 +52,11 @@ const Cart = () => {
             <div>
               <Badge style={{ width: 200, padding: 10 }} color="light">
                 <h5 style={{ fontWeight: 100, color: "gray" }}>合計：</h5>
-                <h3>{cart.total.toLocaleString()}円</h3>
+                <h3>{Number(cart.total).toLocaleString()}円</h3>
               </Badge>
               <div>
                 <Link href="/checkout">
-                  <Button style={{ width: "100%" }} color="primary">
-                    <a>注文する</a>
-                  </Button>
+                  <a className="btn btn-primary" style={{ width: "100%" }}>注文する</a>
                 </Link>
               </div>
             </div>

@@ -27,7 +27,7 @@ const CheckOutForm = () => {
     const cardElement = elements.getElement(CardElement)
     const token = await stripe.createToken(cardElement)
 
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
       method: "POST",
       headers: userToken && {
         Authorization: `Bearer ${userToken}`

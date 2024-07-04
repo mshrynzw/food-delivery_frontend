@@ -2,49 +2,58 @@ import { Card, CardBody, CardImg, CardTitle, Col, Row } from "reactstrap"
 import Link from "next/link"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
+import restaurants from "../../pages/restaurants"
 
-const query = gql`
+const GET_RESTAURANTS = gql`
 {
   restaurants {
-    id
-    name
-    description
-    image {
-      url
+    data{
+      id
+      attributes{
+        name
+        description
+        image{
+          data{
+            attributes{
+              url
+            }
+          }
+        }
+      }
     }
   }
 }
 `
 
 const RestaurantList = (props) => {
-  const { loading, error, data } = useQuery(query)
+  const { loading, error, data } = useQuery(GET_RESTAURANTS)
 
   if (error) return <h1>レストランの読み込みに失敗しました。</h1>
   if (loading) return <h1>読込中・・・</h1>
 
   if (data) {
-    const searchQuery = data.restaurants.filter((restaurant) =>
-      restaurant.name.toLowerCase().includes(props.search)
+    const searchQuery = data.restaurants.data.filter((restaurant) =>
+      restaurant.attributes.name.toLowerCase().includes(props.search)
     )
 
     return (
       <Row>
-        {searchQuery.map((res) => (
-          <Col xs="6" sm="4" key={res.id}>
+        {searchQuery.map((restaurant) => (
+          <Col xs="6" sm="4" key={restaurant.id}>
             <Card style={{ margin: "0 0.5rem 20px 0.5rem" }}>
               <CardImg
-                src={`${process.env.NEXT_PUBLIC_API_URL}${res.image[0].url}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}${restaurant.attributes.image.data.attributes.url}`}
                 top={true}
                 style={{ height: 250 }}
               />
               <CardBody>
-                <CardTitle>{res.name}</CardTitle>
-                <CardTitle>{res.description}</CardTitle>
+                <CardTitle tag="h5">{restaurant.attributes.name}</CardTitle>
+                <CardTitle>{restaurant.attributes.description}</CardTitle>
               </CardBody>
               <div className="card-footer">
                 <Link
-                  href={`/restaurants?id=${res.id}`}
-                  as={`/restaurants/${res.id}`}
+                  href={`/restaurants?id=${restaurant.id}`}
+                  as={`/restaurants/${restaurant.id}`}
                 >
                   <a className="btn btn-primary">もっと見る</a>
                 </Link>
