@@ -3,7 +3,7 @@ import { CardElement, Elements } from "@stripe/react-stripe-js"
 
 const CardSection = (props) => {
   return (
-    <di>
+    <div>
       <div>
         <Label htmlFor="card-element">クレジットカード</Label>
         <div>
@@ -34,7 +34,7 @@ const CardSection = (props) => {
           `
         }
       </style>
-    </di>
+    </div>
   )
 }
 
