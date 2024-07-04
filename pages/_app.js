@@ -88,7 +88,7 @@ class MyApp extends App {
                 ? Object.assign({}, item, { quantity: item.quantity - 1 })
                 : item
             ),
-            total: this.state.cart.total - item.price
+            total: this.state.cart.total - item.attributes.price
           },
         },
         () => Cookies.set("cart", this.state.cart.items))
@@ -100,7 +100,7 @@ class MyApp extends App {
         {
           cart: {
             items: items,
-            total: this.state.cart.total - item.price,
+            total: this.state.cart.total - item.attributes.price,
           },
         },
         () => Cookies.set("cart", this.state.cart.items)
