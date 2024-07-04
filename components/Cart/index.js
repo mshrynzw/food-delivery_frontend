@@ -56,7 +56,7 @@ const Cart = (props) => {
                 <h5 style={{ fontWeight: 100, color: "gray" }}>合計：</h5>
                 <h3>{Number(cart.total).toLocaleString()}円</h3>
               </Badge>
-              {router.pathname === (`/checkout`)
+              {router.pathname === ("/checkout")
                 ?
                 <div>
                   <Link
