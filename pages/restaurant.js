@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardImg, CardTitle, Col, Row } from "reactstrap"
+import { Button, Card, CardBody, CardDeck, CardImg, CardSubtitle, CardText, CardTitle, Col, Row } from "reactstrap"
 import { gql } from "apollo-boost"
 import { useQuery } from "@apollo/react-hooks"
 import { useRouter } from "next/router"
@@ -61,7 +61,8 @@ const RestaurantLists = () => {
                 />
                 <CardBody>
                   <CardTitle tag="h5">{dish.attributes.name}</CardTitle>
-                  <CardTitle>{dish.attributes.description}</CardTitle>
+                  <CardSubtitle className="ml-2 mb-2 text-muted" tag="h6">{Number(dish.attributes.price).toLocaleString()}円</CardSubtitle>
+                  <CardText>{dish.attributes.description}</CardText>
                 </CardBody>
                 <div className="card-footer">
                   <Button outline color="primary" onClick={() => appContext.addItem(dish)}>
