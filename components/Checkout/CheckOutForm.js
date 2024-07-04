@@ -57,7 +57,6 @@ const CheckOutForm = () => {
           {success === ""
             ?
             <Input name="address" onChange={(e) => handleChange(e)}/>
-
             :
             <Input name="address" onChange={(e) => handleChange(e)} disabled/>
           }
