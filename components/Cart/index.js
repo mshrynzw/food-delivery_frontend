@@ -68,14 +68,15 @@ const Cart = (props) => {
                     </a>
                   </Link>
                 </div>
-                :
+                : cart.total > 0 ?
                 <div>
                   <Link href={`/checkout?id=${props.restaurant.data.id}`}>
                     <a className="btn btn-primary" style={{ width: "100%" }}>
-                      確認する
+                      注文確認する
                     </a>
                   </Link>
                 </div>
+                : null
               }
             </div>
           </div>
