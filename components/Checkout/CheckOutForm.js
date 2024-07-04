@@ -44,6 +44,7 @@ const CheckOutForm = () => {
 
     if (response.ok) {
       setSuccess(true)
+      Cookies.remove("cart")
       toggle()
     } else {
       setError(true)
