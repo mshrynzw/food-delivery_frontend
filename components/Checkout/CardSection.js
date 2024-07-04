@@ -21,7 +21,7 @@ const CardSection = (props) => {
                 <div className="order-button-wrapper">
                   {props.successMsg === ""
                     ? <Button onClick={props.submitOrder} color="primary">注文する</Button>
-                    : <Button onClick={props.submitOrder} outline disabled>注文完了</Button>
+                    : <Button outline disabled>注文完了</Button>
                   }
                 </div>
                 {props.errorMsg ? <div>{props.errorMsg}</div> : null}
