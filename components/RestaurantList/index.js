@@ -53,7 +53,6 @@ const RestaurantList = (props) => {
               <div className="card-footer">
                 <Link
                   href={`/restaurant?id=${restaurant.id}`}
-                  as={`/restaurant/${restaurant.id}`}
                 >
                   <a className="btn btn-primary">もっと見る</a>
                 </Link>

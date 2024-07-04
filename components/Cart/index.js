@@ -61,7 +61,6 @@ const Cart = (props) => {
                 <div>
                   <Link
                     href={`/restaurant?id=${router.query.id}`}
-                    as={`/restaurant/${router.query.id}`}
                   >
                     <a className="btn btn-primary" style={{ width: "100%" }}>
                       戻る
