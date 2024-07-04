@@ -5,8 +5,8 @@ import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 
 const checkout = () => {
-  // TODO
-  const stripePromise = loadStripe("pk_test_51PXztiKjfhRPG3YhPNAtCdvhIaqRZ3jdm3ciAdiHTAIpXaxCgX7YkVLoXXsAU8M4jJ3dGncWNYkOaFjQG2BFYCEi00IfEUo3Ll")
+  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISH_ENABLE_KEY)
+
   return (
     <Row>
       <Col style={{ paddingRight: 0 }} sm={{ size: 3, order: 1, offset: 2 }}>
